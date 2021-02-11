@@ -22,6 +22,13 @@
      <td><a href="{{ route('directores.show', $uno['nombre_director']) }}"> {{ $uno['nombre_director'] }} </a></td>
      <td> {{ $uno['ano'] }} </td>
      <td><a href="{{ route('generos.show', $uno['nombre_genero']) }}"> {{ $uno['nombre_genero'] }} </a></td>
+     <td class="vertd">
+        <form action="{{ route('peliculas.destroy', $uno) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button type="submit" title="delete" class="ver">eliminar</button>
+       </form>
+      </td> 
    </tr>
   @endforeach
 </table>

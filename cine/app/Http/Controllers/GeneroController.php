@@ -15,8 +15,7 @@ class GeneroController extends Controller
     public function index()
     {
         $ar = Genero::all();
-	    $ar1 = $ar->toArray();
-	    return view('generos', ['generos' => $ar1]);
+	    return view('generos', ['generos' => $ar]);
     }
 
     /**
@@ -26,7 +25,7 @@ class GeneroController extends Controller
      */
     public function create()
     {
-        //
+        return view('creategenero');
     }
 
     /**
@@ -37,20 +36,25 @@ class GeneroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['nombre' => 'required', 'descripcion' => 'required']);
+
+        Genero::create($request->all());
+         
+        return redirect()->route('generos.index')
+            ->with('success', 'Insertado con éxito.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $nombre
      * @return \Illuminate\Http\Response
      */
     public function show($nombre)
     {
         $obj = Genero::where('nombre',$nombre)->get()[0]->peliculas()->get();
-        if ($obj === null) {
-            return view('DirectorNoExiste', ['titulo' => $nombre]);
+        if ($obj === null || (sizeof($obj) == 1) || !($obj[0])) {
+            return view('error', ['error' => $nombre]);
         }
         return view('generopelis', ['peliculas' => $obj]);
     }
@@ -81,11 +85,13 @@ class GeneroController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Genero  $genero
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Genero $genero)
     {
-        //
+        $genero->delete();
+        return redirect()->route('generos.index')
+            ->with('success', 'Eliminado con éxito');
     }
 }

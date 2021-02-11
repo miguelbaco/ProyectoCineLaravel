@@ -11,11 +11,18 @@
         <link href="/css/app.css" rel="stylesheet">
         </style>
     </head>
-    <body class="antialiased">
+    <body>
+    <h2>Añade un género</h2>
       <div>
-        <a href="/directores">Directores</a><br>
-        <a href="/peliculas">Películas</a><br>
-        <a href="/generos">Géneros</a><br>
-      </div>
+        <form action="{{ route('generos.store') }}" method="POST">
+          @csrf
+          <label for="nombre">Nombre del género:</label><br>
+          <input type="text" id="nombre" name="nombre"><br>
+          <label for="descripcion">Descripción:</label><br>
+          <input type="text" id="descripcion" name="descripcion"><br>
+          <input type="submit" value="Enviar">
+        </form>
+      </div>     
+
     </body>
 </html>

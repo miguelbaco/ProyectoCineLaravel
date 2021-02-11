@@ -15,8 +15,7 @@ class DirectorController extends Controller
     public function index()
     {
         $ar = Director::all();
-	    $ar1 = $ar->toArray();
-	    return view('directores', ['directores' => $ar1]);
+	    return view('directores', ['directores' => $ar]);
     }
 
     /**
@@ -26,7 +25,7 @@ class DirectorController extends Controller
      */
     public function create()
     {
-        //
+        return view('createdirector');
     }
 
     /**
@@ -37,7 +36,12 @@ class DirectorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['nombre' => 'required', 'pais' => 'required', 'fnac' => 'required', 'edad' => 'required']);
+
+        Director::create($request->all());
+         
+        return redirect()->route('directores.index')
+            ->with('success', 'Insertado con éxito.');
     }
 
     /**
@@ -89,11 +93,13 @@ class DirectorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Director  $director
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Director $director)
     {
-        //
+        $director->delete();
+        return redirect()->route('directores.index')
+            ->with('success', 'Eliminado con éxito');
     }
 }

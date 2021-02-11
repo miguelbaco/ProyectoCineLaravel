@@ -40,12 +40,16 @@ class PeliculaController extends Controller
 
         Pelicula::create($request->all());
          
+        return redirect()->route('peliculas.index')
+            ->with('success', 'Insertado con éxito.');
         /*$u = new Pelicula();
         $u['titulo'] = $request['titulo'];
         $u['nombre_director'] = $request['nombre_director'];
         $u['ano'] = $request['ano'];
         $u['nombre_genero'] = $request['nombre_genero'];
         $u-> save();*/
+
+
     }
 
     /**
@@ -57,8 +61,9 @@ class PeliculaController extends Controller
     public function show($titulo)
     {
         $obj = Pelicula::where('titulo',$titulo)->get();
+        //$obj = Pelicula::find($titulo)->get();
         if ($obj === null) {
-            return view('PeliNoExiste', ['titulo' => $titulo]);
+            return view('error', ['titulo' => $titulo]);
         }
         return view('pelicula', ['peliculas' => $obj]);
     }
@@ -89,11 +94,13 @@ class PeliculaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pelicula  $pelicula
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pelicula $pelicula)
     {
-        //
+        $pelicula->delete();
+        return redirect()->route('peliculas.index')
+            ->with('success', 'Eliminado con éxito');
     }
 }

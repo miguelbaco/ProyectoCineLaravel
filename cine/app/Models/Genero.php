@@ -13,6 +13,10 @@ class Genero extends Model
         'nombre',
         'descripcion',
         ];
+    protected $keyType = 'string';
+    protected $primaryKey = 'nombre';
+    public $incrementing = false;
+    public $timestamps = false;
 
 
     public function peliculas()

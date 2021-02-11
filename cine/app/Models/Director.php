@@ -15,6 +15,10 @@ class Director extends Model
         'fnac',
         'edad'
         ];
+    protected $keyType = 'string';
+    protected $primaryKey = 'nombre';
+    public $incrementing = false;
+    public $timestamps = false;
 
 
     public function peliculas()

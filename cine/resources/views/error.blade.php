@@ -13,9 +13,7 @@
     </head>
     <body class="antialiased">
       <div>
-        <a href="/directores">Directores</a><br>
-        <a href="/peliculas">Películas</a><br>
-        <a href="/generos">Géneros</a><br>
+        <h3>No se ha encontrado información sobre {{error}}</h3>
       </div>
     </body>
 </html>

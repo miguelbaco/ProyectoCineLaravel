@@ -17,6 +17,8 @@ class Pelicula extends Model
         ];
     protected $keyType = 'string';
     protected $primaryKey = 'titulo';
+    public $incrementing = false;
+    public $timestamps = false;
 
     public function genero() 
 	{

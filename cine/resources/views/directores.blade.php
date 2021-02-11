@@ -22,10 +22,20 @@
      <td> {{ $uno['fnac'] }} </td>
      <td> {{ $uno['edad'] }} </td>
      <td class="vertd"><a href="{{ route('directores.show', $uno['nombre']) }}" class="ver"><input type="button" value="Ver peliculas de {{ $uno['nombre'] }}"></a></td>
+     <td class="vertd">
+        <form action="{{ route('directores.destroy', $uno) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button type="submit" title="delete" class="ver">eliminar</button>
+       </form>
+      </td> 
    </tr>
   @endforeach
 </table> 
 <br>
 <a href="/" class="volver"><input type="button" value="volver"></a>
+<br>
+
+<a href="{{ route('directores.create') }}"><input type="button" value="Añadir director"></a>
 </body>
 <html>
