@@ -15,21 +15,17 @@ class Pelicula extends Model
         'ano',
         'nombre_genero'
         ];
-
-    public function getTodos() {
-        $ar = Pelicula::all();
-	    $ar1 = $ar->toArray();
-		return $ar1;
-	}
+    protected $keyType = 'string';
+    protected $primaryKey = 'titulo';
 
     public function genero() 
 	{
-		return $this->belongsTo('App\Models\Genero');
+		return $this->belongsTo('App\Models\Genero', 'nombre', 'nombre_genero');
 	}
 
     public function director()
 	{
-		return $this->hasOne('App\Models\Director');
+		return $this->hasOne('App\Models\Director', 'nombre','nombre_director');
 	}
 
     

@@ -46,9 +46,13 @@ class GeneroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($nombre)
     {
-        //
+        $obj = Genero::where('nombre',$nombre)->get()[0]->peliculas()->get();
+        if ($obj === null) {
+            return view('DirectorNoExiste', ['titulo' => $nombre]);
+        }
+        return view('generopelis', ['peliculas' => $obj]);
     }
 
     /**

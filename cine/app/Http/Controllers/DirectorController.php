@@ -46,11 +46,23 @@ class DirectorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($nombre)
     {
-        //
+        $obj = Director::where('nombre',$nombre)->get()[0]->peliculas()->get();
+        if ($obj === null) {
+            return view('DirectorNoExiste', ['titulo' => $nombre]);
+        }
+        return view('directorpelis', ['peliculas' => $obj]);
     }
 
+    public function suspeliculas($nombre)
+    {
+        $obj = Director::where('nombre',$nombre)->get()[0]->peliculas()->get();
+        if ($obj === null) {
+            return view('DirectorNoExiste', ['titulo' => $nombre]);
+        }
+        return view('directorpelis', ['peliculas' => $obj]);
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -25,7 +25,7 @@ class PeliculaController extends Controller
      */
     public function create()
     {
-        //
+        return view('createpeli');
     }
 
     /**
@@ -36,18 +36,31 @@ class PeliculaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['titulo' => 'required', 'nombre_director' => 'required', 'ano' => 'required', 'nombre_genero' => 'required']);
+
+        Pelicula::create($request->all());
+         
+        /*$u = new Pelicula();
+        $u['titulo'] = $request['titulo'];
+        $u['nombre_director'] = $request['nombre_director'];
+        $u['ano'] = $request['ano'];
+        $u['nombre_genero'] = $request['nombre_genero'];
+        $u-> save();*/
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $titulo
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($titulo)
     {
-        //
+        $obj = Pelicula::where('titulo',$titulo)->get();
+        if ($obj === null) {
+            return view('PeliNoExiste', ['titulo' => $titulo]);
+        }
+        return view('pelicula', ['peliculas' => $obj]);
     }
 
     /**
