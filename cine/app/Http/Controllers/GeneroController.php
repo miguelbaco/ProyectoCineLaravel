@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genero;
 use Illuminate\Http\Request;
 
 class GeneroController extends Controller
@@ -13,7 +14,9 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        //
+        $ar = Genero::all();
+	    $ar1 = $ar->toArray();
+	    return view('generos', ['generos' => $ar1]);
     }
 
     /**

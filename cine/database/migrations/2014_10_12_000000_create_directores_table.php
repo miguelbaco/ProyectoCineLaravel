@@ -18,7 +18,7 @@ class CreateDirectoresTable extends Migration
             $table->string('nombre')->unique();
             $table->string('pais');
             $table->timestamp('fnac');
-	    $table->integer('edad');
+	        $table->integer('edad');
         });
     }
 

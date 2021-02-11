@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Director;
 use Illuminate\Http\Request;
 
 class DirectorController extends Controller
@@ -13,7 +14,9 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        //
+        $ar = Director::all();
+	    $ar1 = $ar->toArray();
+	    return view('directores', ['directores' => $ar1]);
     }
 
     /**

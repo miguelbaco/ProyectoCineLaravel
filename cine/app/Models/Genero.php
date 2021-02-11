@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Genero extends Model
 {
     use HasFactory;
+    public $table = 'generos';
+	protected $fillable = [
+        'nombre',
+        'descripcion',
+        ];
+
+
+    public function peliculas()
+	{
+		return $this->hasMany('App\Models\Pelicula');
+	}
 }
