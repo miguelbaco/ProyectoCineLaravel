@@ -52,11 +52,12 @@ class GeneroController extends Controller
      */
     public function show($nombre)
     {
-        $obj = Genero::where('nombre',$nombre)->get()[0]->peliculas()->get();
-        if ($obj === null || (sizeof($obj) == 1) || !($obj[0])) {
+        $obj = Genero::find($nombre)->peliculas()->get();
+        if ($obj === null) {
             return view('error', ['error' => $nombre]);
         }
         return view('generopelis', ['peliculas' => $obj]);
+        
     }
 
     /**

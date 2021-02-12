@@ -60,12 +60,12 @@ class PeliculaController extends Controller
      */
     public function show($titulo)
     {
-        $obj = Pelicula::where('titulo',$titulo)->get();
+        $obj = Pelicula::find($titulo);
         //$obj = Pelicula::find($titulo)->get();
         if ($obj === null) {
-            return view('error', ['titulo' => $titulo]);
+            return view('error', ['error' => $titulo]);
         }
-        return view('pelicula', ['peliculas' => $obj]);
+        return view('pelicula', ['pelicula' => $obj]);
     }
 
     /**

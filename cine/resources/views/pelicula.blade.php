@@ -9,14 +9,12 @@
 </head>
 <body>
 
-@foreach ($peliculas as $pelicula)
-    <h1>{{ $pelicula->titulo }}</h1>
+    <h1>{{ $pelicula['titulo'] }}</h1>
     <ul>
-      <li>{{ $pelicula->nombre_director }}</li>
-      <li>{{ $pelicula->ano }}</li>
-      <li>{{ $pelicula->nombre_genero }}</li>
+      <li>{{ $pelicula['nombre_director'] }}</li>
+      <li>{{ $pelicula['ano'] }}</li>
+      <li>{{ $pelicula['nombre_genero'] }}</li>
     </ul>
-  @endforeach
 
   <a href="/" class="volver"><input type="button" value="volver"></a>
 </body>

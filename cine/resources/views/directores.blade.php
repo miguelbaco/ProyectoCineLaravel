@@ -23,7 +23,7 @@
      <td> {{ $uno['edad'] }} </td>
      <td class="vertd"><a href="{{ route('directores.show', $uno['nombre']) }}" class="ver"><input type="button" value="Ver peliculas de {{ $uno['nombre'] }}"></a></td>
      <td class="vertd">
-        <form action="{{ route('directores.destroy', $uno) }}" method="POST">
+        <form action="{{ route('directores.destroy', $uno['nombre']) }}" method="POST">
           @csrf
           @method('DELETE')
           <button type="submit" title="delete" class="ver">eliminar</button>

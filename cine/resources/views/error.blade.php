@@ -13,7 +13,7 @@
     </head>
     <body class="antialiased">
       <div>
-        <h3>No se ha encontrado información sobre {{error}}</h3>
+        <h3>No se ha encontrado información sobre {{$error}}</h3>
       </div>
     </body>
 </html>

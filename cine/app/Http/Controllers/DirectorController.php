@@ -47,26 +47,19 @@ class DirectorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $nombre
      * @return \Illuminate\Http\Response
      */
     public function show($nombre)
     {
-        $obj = Director::where('nombre',$nombre)->get()[0]->peliculas()->get();
+        // $obj = Director::where('nombre',$nombre)->get()[0]->peliculas()->get();
+        $obj = Director::find($nombre)->peliculas()->get();
         if ($obj === null) {
-            return view('DirectorNoExiste', ['titulo' => $nombre]);
+            return view('error', ['error' => $nombre]);
         }
         return view('directorpelis', ['peliculas' => $obj]);
     }
 
-    public function suspeliculas($nombre)
-    {
-        $obj = Director::where('nombre',$nombre)->get()[0]->peliculas()->get();
-        if ($obj === null) {
-            return view('DirectorNoExiste', ['titulo' => $nombre]);
-        }
-        return view('directorpelis', ['peliculas' => $obj]);
-    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -93,12 +86,12 @@ class DirectorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Director  $director
+     * @param  string $nombre
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Director $director)
+    public function destroy(string $nombre)
     {
-        $director->delete();
+        Director::find($nombre)->delete();
         return redirect()->route('directores.index')
             ->with('success', 'Eliminado con éxito');
     }
